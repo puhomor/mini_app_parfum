@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: parfum-outlet-app
+    runtime: python
+    plan: free
+    autoDeploy: true
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.13.7
+      - key: BOT_TOKEN
+        sync: false
+      - key: YOUR_TELEGRAM_ID
+        sync: false
