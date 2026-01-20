@@ -1,18 +1,17 @@
 from flask import Flask, render_template, request, jsonify
 import requests
 import os
+from datetime import datetime
 
 app = Flask(__name__)
 
-# Ваш токен бота (создать через @BotFather)
-BOT_TOKEN = os.environ.get('BOT_TOKEN', 'ВАШ_ТОКЕН_БОТА')
-YOUR_TELEGRAM_ID = os.environ.get('YOUR_TELEGRAM_ID', 'ваш_id_или_@puhomor')
+# Получаем переменные окружения
+BOT_TOKEN = os.environ.get('BOT_TOKEN', '8228100485:AAEiPlXrFNVHYFbo8VTnDypnERgw5fxlBCc')
+YOUR_TELEGRAM_ID = os.environ.get('YOUR_TELEGRAM_ID', '889038004')
 
-# Проверяем переменные окружения (для отладки)
-print(f"BOT_TOKEN loaded: {'Yes' if BOT_TOKEN != 'ВАШ_ТОКЕН_БОТА' else 'No'}")
-print(f"YOUR_TELEGRAM_ID: {YOUR_TELEGRAM_ID}")
+# Для отладки
+print(f"App started. BOT_TOKEN: {'Set' if BOT_TOKEN != '8228100485:AAEiPlXrFNVHYFbo8VTnDypnERgw5fxlBCc' else 'Not set'}")
 
-# Главная страница мини-приложения
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -22,55 +21,52 @@ def place_order():
     try:
         data = request.json
         
-        # Формируем сообщение для Telegram
-        message = f"🎉 НОВЫЙ ЗАКАЗ!\n\n"
-        message += f"Аромат: {data.get('perfume_name')}\n"
-        message += f"Объем: {data.get('volume')}\n"
-        message += f"Цена: {data.get('price')} руб.\n"
-        message += f"Имя клиента: {data.get('customer_name', 'Не указано')}\n"
-        message += f"Телефон: {data.get('phone', 'Не указан')}\n"
-        message += f"Комментарий: {data.get('comments', 'Нет')}\n\n"
-        message += f"📅 {datetime.now().strftime('%d.%m.%Y %H:%M')}"
+        if not data:
+            return jsonify({'success': False, 'error': 'No data provided'}), 400
         
-        # Отправляем сообщение в ваш Telegram
+        # Формируем сообщение
+        message = f"🛍️ **НОВЫЙ ЗАКАЗ ИЗ MINI APP**\n\n"
+        message += f"▪️ Аромат: {data.get('perfume_name', 'Не указан')}\n"
+        message += f"▪️ Объем: {data.get('volume', 'Не указан')}\n"
+        message += f"▪️ Цена: {data.get('price', '0')} руб.\n"
+        message += f"▪️ Клиент: {data.get('customer_name', 'Не указано')}\n"
+        message += f"▪️ Телефон: {data.get('phone', 'Не указан')}\n"
+        message += f"▪️ Комментарий: {data.get('comments', 'Нет')}\n\n"
+        message += f"⏰ {datetime.now().strftime('%d.%m.%Y %H:%M')}"
+        
+        # Отправляем в Telegram
         url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
-        
-        # Проверяем формат YOUR_TELEGRAM_ID
-        chat_id = YOUR_TELEGRAM_ID
-        
-        # Если это username (начинается с @), нужно получить его chat_id
-        # Но для начала можно использовать ваш числовой ID
-        # Лучше всего указать ваш числовой ID в переменных окружения
-        
         payload = {
-            'chat_id': chat_id,
+            'chat_id': YOUR_TELEGRAM_ID,
             'text': message,
-            'parse_mode': 'HTML'
+            'parse_mode': 'Markdown'
         }
         
         response = requests.post(url, json=payload)
         
-        # Логируем ответ от Telegram API
-        print(f"Telegram API response: {response.status_code}")
-        
         if response.status_code == 200:
-            return jsonify({'success': True, 'message': 'Заказ отправлен!'})
+            print(f"Order sent successfully: {data.get('perfume_name')}")
+            return jsonify({
+                'success': True, 
+                'message': '✅ Заказ отправлен! Я свяжусь с вами в Telegram в течение 5 минут.'
+            })
         else:
-            error_msg = f"Ошибка Telegram API: {response.text}"
-            print(error_msg)
-            return jsonify({'success': False, 'error': error_msg}), 500
-        
+            error_text = response.text
+            print(f"Telegram API error: {error_text}")
+            return jsonify({
+                'success': False, 
+                'error': f'Ошибка отправки: {error_text}'
+            }), 500
+            
     except Exception as e:
         print(f"Error in place_order: {str(e)}")
         return jsonify({'success': False, 'error': str(e)}), 500
 
-# Вебхук для бота (опционально)
-@app.route('/webhook', methods=['POST'])
-def webhook():
-    update = request.json
-    # Обработка входящих сообщений боту
+# Health check для Render
+@app.route('/health')
+def health():
     return 'OK'
 
 if __name__ == '__main__':
-    # Для локальной разработки
-    app.run(debug=True, port=5000)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=False)

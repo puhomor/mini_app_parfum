@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: parfum-outlet-app
+    name: parfum-outlet-mini-app
     runtime: python
     plan: free
     autoDeploy: true
@@ -8,7 +8,7 @@ services:
     startCommand: gunicorn app:app
     envVars:
       - key: PYTHON_VERSION
-        value: 3.13.7
+        value: 3.11.9
       - key: BOT_TOKEN
         sync: false
       - key: YOUR_TELEGRAM_ID
