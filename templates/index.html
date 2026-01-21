@@ -2,108 +2,193 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Parfum Outlet | Каталог</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Parfum Outlet</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
     <div class="container">
+        <!-- Шапка -->
         <header>
-            <h1>🏢 Parfum Outlet</h1>
-            <p class="subtitle">Оригинальные духи на 40% дешевле</p>
+            <h1>⚡ PARFUM OUTLET</h1>
+            <p class="subtitle">Прямые поставки из ЕС • -30% к ритейлу</p>
         </header>
 
+        <!-- Каталог -->
         <div class="catalog">
-            <!-- Товар 1 -->
-            <div class="product-card">
+            <!-- Изображения будут установлены через JavaScript -->
+            <div class="product-card" data-product-id="1">
+                <div class="product-badge">🔥</div>
                 <div class="product-image">
-                    <img src="https://via.placeholder.com/300x300/8B7355/FFFFFF?text=Creed+Aventus" alt="Creed Aventus">
+                    <img src="" alt="Creed Aventus">
                 </div>
-                <div class="product-info">
-                    <h3>Creed Aventus</h3>
-                    <p class="description">Легендарный аромат с ананасом и березой</p>
-                    
-                    <div class="volume-selector">
-                        <button class="volume-btn active" data-volume="50ml" data-price="32000">50ml - 32 000₽</button>
-                        <button class="volume-btn" data-volume="100ml" data-price="42000">100ml - 42 000₽</button>
-                    </div>
-                    
-                    <div class="price-display">
-                        <span class="old-price">60 000₽</span>
-                        <span class="current-price">42 000₽</span>
-                        <span class="discount">-30%</span>
-                    </div>
-                    
-                    <button class="order-btn" data-product="Creed Aventus">
-                        🛒 Заказать
-                    </button>
-                </div>
+                <div class="product-price">42 000₽</div>
+                <div class="product-name">Creed Aventus</div>
             </div>
 
-            <!-- Товар 2 -->
-            <div class="product-card">
+            <div class="product-card" data-product-id="2">
+                <div class="product-badge">NEW</div>
                 <div class="product-image">
-                    <img src="https://via.placeholder.com/300x300/000000/FFFFFF?text=Tom+Ford+Noir" alt="Tom Ford Noir">
+                    <img src="" alt="Tom Ford">
                 </div>
-                <div class="product-info">
-                    <h3>Tom Ford Noir Extreme</h3>
-                    <p class="description">Роскошный восточно-пряный аромат</p>
-                    
-                    <div class="volume-selector">
-                        <button class="volume-btn active" data-volume="50ml" data-price="28000">50ml - 28 000₽</button>
-                        <button class="volume-btn" data-volume="100ml" data-price="38000">100ml - 38 000₽</button>
-                    </div>
-                    
-                    <div class="price-display">
-                        <span class="old-price">55 000₽</span>
-                        <span class="current-price">38 000₽</span>
-                        <span class="discount">-31%</span>
-                    </div>
-                    
-                    <button class="order-btn" data-product="Tom Ford Noir Extreme">
-                        🛒 Заказать
-                    </button>
+                <div class="product-price">38 000₽</div>
+                <div class="product-name">Tom Ford Noir</div>
+            </div>
+
+            <div class="product-card" data-product-id="3">
+                <div class="product-badge">🔥</div>
+                <div class="product-image">
+                    <img src="" alt="Dior">
                 </div>
+                <div class="product-price">36 000₽</div>
+                <div class="product-name">Dior Sauvage</div>
+            </div>
+
+            <div class="product-card" data-product-id="4">
+                <div class="product-badge">⭐</div>
+                <div class="product-image">
+                    <img src="" alt="Chanel">
+                </div>
+                <div class="product-price">34 000₽</div>
+                <div class="product-name">Chanel Bleu</div>
             </div>
         </div>
+    </div>
 
-        <!-- Модальное окно заказа -->
-        <div id="orderModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>Оформление заказа</h2>
-                
-                <form id="orderForm">
-                    <input type="hidden" id="selectedProduct" name="product">
-                    <input type="hidden" id="selectedVolume" name="volume">
-                    <input type="hidden" id="selectedPrice" name="price">
-                    
-                    <div class="form-group">
-                        <label>Ваше имя:</label>
-                        <input type="text" id="customerName" placeholder="Как к вам обращаться?" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Телефон для связи:</label>
-                        <input type="tel" id="phone" placeholder="+7 (999) 123-45-67" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Комментарий к заказу (необязательно):</label>
-                        <textarea id="comments" rows="3" placeholder="Например: 'Хочу получить в субботу'"></textarea>
-                    </div>
-                    
-                    <div class="order-summary">
-                        <h3>Итого:</h3>
-                        <p id="summaryText">Creed Aventus, 100ml - 42 000₽</p>
-                    </div>
-                    
-                    <button type="submit" class="submit-btn">
-                        ✅ Отправить заказ в Telegram
-                    </button>
-                </form>
+    <!-- Кнопка корзины -->
+    <div class="cart-floating-btn">
+        <button class="cart-button" id="cartButton">
+            🛒
+            <span class="cart-count" id="cartCount">0</span>
+        </button>
+    </div>
+
+    <!-- Страница карточки товара -->
+    <div class="product-page" id="productPage">
+        <div class="product-page-header">
+            <button class="back-btn" id="backBtn">←</button>
+            <h2 id="productPageTitle">Товар</h2>
+        </div>
+        
+        <div class="product-page-content">
+            <div class="product-page-image">
+                <img id="productPageImage" src="" alt="">
             </div>
+            
+            <div class="product-page-info">
+                <h1 id="productPageName">Название товара</h1>
+                <div class="product-page-price" id="productPagePrice">0₽</div>
+                
+                <div class="product-page-description" id="productPageDescription">
+                    Описание товара появится здесь
+                </div>
+                
+                <div class="volume-section">
+                    <h3>Выберите объем:</h3>
+                    <div class="volume-options" id="volumeOptions">
+                        <!-- Объемы будут добавлены через JS -->
+                    </div>
+                </div>
+                
+                <button class="add-to-cart-btn" id="addToCartBtn">
+                    <span>🛒</span>
+                    <span>Добавить в корзину</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно корзины -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-content">
+            <div class="cart-header">
+                <h2>🛒 Корзина</h2>
+                <button class="close-cart-btn" onclick="closeCartModal()">✕</button>
+            </div>
+            
+            <div class="cart-items" id="cartItems">
+                <!-- Товары добавляются сюда -->
+            </div>
+            
+            <div class="cart-total">
+                <div>Итого:</div>
+                <div id="cartTotalPrice">0₽</div>
+            </div>
+            
+            <button class="checkout-btn" id="checkoutButton">
+                Оформить заказ
+            </button>
+        </div>
+    </div>
+
+    <!-- Модальное окно оформления заказа -->
+    <div class="order-modal" id="orderModal">
+        <div class="order-modal-content">
+            <div class="order-modal-header">
+                <h2>🎯 Оформление заказа</h2>
+                <button class="close-order-btn" onclick="closeOrderModal()">✕</button>
+            </div>
+            
+            <form id="orderForm">
+                <!-- Тег пользователя -->
+                <div class="user-tag-container">
+                    <span class="user-tag-icon">@</span>
+                    <span class="user-tag-label">Telegram:</span>
+                    <span class="user-tag-value" id="userTagValue">загрузка...</span>
+                </div>
+                
+                <!-- Поле имени -->
+                <div class="form-field">
+                    <label>👤 Ваше имя (необязательно)</label>
+                    <input type="text" id="customerName" class="form-input" placeholder="Как к вам обращаться?">
+                </div>
+                
+                <!-- Доставка -->
+                <div class="form-field">
+                    <label>🚚 Способ получения</label>
+                    <div class="delivery-options">
+                        <button type="button" class="delivery-btn active" data-delivery="pickup">
+                            🏢 Самовывоз
+                        </button>
+                        <button type="button" class="delivery-btn" data-delivery="sdek">
+                            📦 СДЭК
+                        </button>
+                        <button type="button" class="delivery-btn" data-delivery="courier">
+                            🚗 Курьер
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Поле адреса -->
+                <div class="form-field" id="addressField" style="display: none;">
+                    <label>🏠 Адрес доставки</label>
+                    <textarea id="address" class="form-textarea" placeholder="Город, улица, дом, квартира"></textarea>
+                </div>
+                
+                <!-- Комментарий -->
+                <div class="form-field">
+                    <label>💬 Комментарий</label>
+                    <textarea id="comments" class="form-textarea" placeholder="Пожелания к заказу"></textarea>
+                </div>
+                
+                <!-- Итог -->
+                <div class="order-summary">
+                    <div class="summary-title">Ваш заказ:</div>
+                    <div id="orderSummary">
+                        <!-- Детали заказа -->
+                    </div>
+                    <div class="summary-total">
+                        <span>К оплате:</span>
+                        <span id="summaryTotal">0₽</span>
+                    </div>
+                </div>
+                
+                <!-- Кнопка отправки -->
+                <button type="submit" class="submit-order-btn">
+                    Отправить заказ
+                </button>
+            </form>
         </div>
     </div>
 

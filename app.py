@@ -21,17 +21,37 @@ def place_order():
     try:
         data = request.json
         
-        if not data:
-            return jsonify({'success': False, 'error': 'No data provided'}), 400
-        
-        # Формируем сообщение
+        # Формируем детальное сообщение
         message = f"🛍️ **НОВЫЙ ЗАКАЗ ИЗ MINI APP**\n\n"
-        message += f"▪️ Аромат: {data.get('perfume_name', 'Не указан')}\n"
-        message += f"▪️ Объем: {data.get('volume', 'Не указан')}\n"
-        message += f"▪️ Цена: {data.get('price', '0')} руб.\n"
-        message += f"▪️ Клиент: {data.get('customer_name', 'Не указано')}\n"
-        message += f"▪️ Телефон: {data.get('phone', 'Не указан')}\n"
-        message += f"▪️ Комментарий: {data.get('comments', 'Нет')}\n\n"
+        
+        # Добавляем товары из корзины
+        if 'cart' in data and data['cart']:
+            message += "**Товары:**\n"
+            for item in data['cart']:
+                message += f"• {item.get('name', 'Неизвестно')} ({item.get('volume', 'N/A')}) "
+                message += f"- {item.get('quantity', 1)} шт. × {item.get('price', 0)} руб.\n"
+            message += f"\n**Итого товаров:** {data.get('total_items', 0)} шт.\n"
+            message += f"**Общая сумма:** {data.get('total_price', 0):,} руб.\n\n"
+        else:
+            # Старая версия для одного товара
+            message += f"**Товар:** {data.get('perfume_name', 'Не указан')}\n"
+            message += f"**Объем:** {data.get('volume', 'Не указан')}\n"
+            message += f"**Цена:** {data.get('price', '0')} руб.\n\n"
+        
+        # Информация о клиенте
+        message += "**Информация о клиенте:**\n"
+        message += f"👤 Имя: {data.get('customer_name', 'Не указано')}\n"
+        message += f"📱 Телефон: {data.get('phone', 'Не указан')}\n"
+        message += f"📲 Telegram: {data.get('telegram_tag', 'Не указан')}\n\n"
+        
+        # Доставка
+        message += "**Доставка:**\n"
+        message += f"Способ: {data.get('delivery_type', 'Не указан')}\n"
+        if 'address' in data:
+            message += f"Адрес: {data.get('address', 'Не указан')}\n\n"
+        
+        # Комментарий
+        message += f"**Комментарий:** {data.get('comments', 'Нет комментариев')}\n\n"
         message += f"⏰ {datetime.now().strftime('%d.%m.%Y %H:%M')}"
         
         # Отправляем в Telegram
@@ -45,10 +65,10 @@ def place_order():
         response = requests.post(url, json=payload)
         
         if response.status_code == 200:
-            print(f"Order sent successfully: {data.get('perfume_name')}")
+            print(f"Order sent successfully from {data.get('telegram_tag', 'unknown')}")
             return jsonify({
                 'success': True, 
-                'message': '✅ Заказ отправлен! Я свяжусь с вами в Telegram в течение 5 минут.'
+                'message': '✅ Заказ отправлен!'
             })
         else:
             error_text = response.text
@@ -68,5 +88,5 @@ def health():
     return 'OK'
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
+    port = int(os.environ.get('PORT', 5001))
     app.run(host='0.0.0.0', port=port, debug=False)
