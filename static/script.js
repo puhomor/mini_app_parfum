@@ -349,6 +349,7 @@ function changeAdditionalImage(imageIndex) {
 }
 
 // Страница товара
+// Страница товара
 function showProductPage(productId) {
     console.log('Показываем страницу товара ID:', productId);
     
@@ -368,182 +369,113 @@ function showProductPage(productId) {
     document.getElementById('productPageName').textContent = product.name;
     document.getElementById('productPageDescription').textContent = product.description;
     
-    // Устанавливаем основное изображение
-    const productImage = document.getElementById('productPageImage');
-    if (productImage) {
-        productImage.src = product.productImage;
-        productImage.alt = product.name;
-    }
-    
-    // Устанавливаем дополнительные изображения если они есть
+    // Создаем слайдер с фотографиями
     const additionalImagesContainer = document.getElementById('productImagesSection');
     if (additionalImagesContainer) {
         additionalImagesContainer.innerHTML = '';
         
-        if (product.additionalImages && product.additionalImages.length > 0) {
-            console.log('Дополнительных изображений:', product.additionalImages.length);
+        // ВСЕ ИЗОБРАЖЕНИЯ (основное + дополнительные)
+        const allImages = [product.productImage, ...(product.additionalImages || [])];
+        
+        // Создаем контейнер для слайдера
+        const sliderContainer = document.createElement('div');
+        sliderContainer.className = 'product-images-slider';
+        sliderContainer.id = 'imageSlider';
+        
+        // Создаем трек для слайдов
+        const sliderTrack = document.createElement('div');
+        sliderTrack.className = 'slider-track';
+        
+        // Добавляем все фото в слайдер
+        allImages.forEach((imageUrl, index) => {
+            const slide = document.createElement('div');
+            slide.className = 'slide';
+            slide.dataset.index = index;
             
-            // ВСЕ ИЗОБРАЖЕНИЯ (основное + дополнительные)
-            const allImages = [product.productImage, ...product.additionalImages];
-            let currentImageIndex = 0;
+            const img = document.createElement('img');
+            img.src = imageUrl;
+            img.alt = `${product.name} - фото ${index + 1}`;
+            img.loading = 'lazy';
             
-            // Заголовок блока
-            const title = document.createElement('div');
-            title.className = 'images-section-title';
-            title.textContent = 'Фотографии товара';
-            additionalImagesContainer.appendChild(title);
+            // Обработчик ошибок загрузки изображения
+            img.onerror = function() {
+                console.error('Ошибка загрузки изображения:', imageUrl);
+                this.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 100 100"><rect width="100" height="100" fill="%230f0f15"/><text x="50" y="55" font-family="Arial" font-size="10" fill="%23666" text-anchor="middle">Изображение</text><text x="50" y="70" font-family="Arial" font-size="10" fill="%23666" text-anchor="middle">не загружено</text></svg>';
+            };
             
-            // Большое основное фото
-            const mainImageContainer = document.createElement('div');
-            mainImageContainer.className = 'main-product-image';
-            mainImageContainer.innerHTML = `<img id="mainDisplayImage" src="${product.productImage}" alt="${product.name}">`;
-            additionalImagesContainer.appendChild(mainImageContainer);
-            
-            // Счетчик фото
-            const counter = document.createElement('div');
-            counter.className = 'image-counter';
-            counter.id = 'imageCounter';
-            counter.textContent = `Фото 1 из ${allImages.length}`;
-            additionalImagesContainer.appendChild(counter);
-            
-            // Миниатюры
+            slide.appendChild(img);
+            sliderTrack.appendChild(slide);
+        });
+        
+        sliderContainer.appendChild(sliderTrack);
+        
+        // Счетчик фото
+        const imageCounter = document.createElement('div');
+        imageCounter.className = 'image-counter';
+        imageCounter.id = 'imageCounter';
+        imageCounter.textContent = `1 / ${allImages.length}`;
+        sliderContainer.appendChild(imageCounter);
+        
+        // Стрелки навигации
+        const prevArrow = document.createElement('button');
+        prevArrow.className = 'slider-arrow prev';
+        prevArrow.innerHTML = '◀';
+        prevArrow.title = 'Предыдущее фото';
+        
+        const nextArrow = document.createElement('button');
+        nextArrow.className = 'slider-arrow next';
+        nextArrow.innerHTML = '▶';
+        nextArrow.title = 'Следующее фото';
+        
+        sliderContainer.appendChild(prevArrow);
+        sliderContainer.appendChild(nextArrow);
+        
+        // Индикаторы (точки)
+        const indicator = document.createElement('div');
+        indicator.className = 'slider-indicator';
+        
+        allImages.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.className = `slider-dot ${index === 0 ? 'active' : ''}`;
+            dot.dataset.index = index;
+            indicator.appendChild(dot);
+        });
+        
+        sliderContainer.appendChild(indicator);
+        
+        // Добавляем слайдер на страницу
+        additionalImagesContainer.appendChild(sliderContainer);
+        
+        // Миниатюры (если фото больше 1)
+        if (allImages.length > 1) {
             const thumbnailsContainer = document.createElement('div');
-            thumbnailsContainer.className = 'additional-images-container';
+            thumbnailsContainer.className = 'image-thumbnails';
             
             allImages.forEach((imageUrl, index) => {
-                const thumb = document.createElement('div');
-                thumb.className = `image-thumbnail ${index === 0 ? 'active' : ''}`;
-                thumb.dataset.index = index;
+                const thumbnail = document.createElement('div');
+                thumbnail.className = `thumbnail-item ${index === 0 ? 'active' : ''}`;
+                thumbnail.dataset.index = index;
                 
                 const img = document.createElement('img');
                 img.src = imageUrl;
-                img.alt = `${product.name} ${index + 1}`;
-                img.onerror = function() {
-                    this.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23111"/><text x="50" y="55" font-family="Arial" font-size="12" fill="%23666" text-anchor="middle">Нет фото</text></svg>';
-                };
+                img.alt = `Миниатюра ${index + 1}`;
                 
-                const number = document.createElement('div');
-                number.className = 'thumbnail-number';
-                number.textContent = index + 1;
+                thumbnail.appendChild(img);
+                thumbnailsContainer.appendChild(thumbnail);
                 
-                thumb.appendChild(img);
-                thumb.appendChild(number);
-                
-                thumb.addEventListener('click', () => {
-                    changeImage(index);
+                // Обработчик клика по миниатюре
+                thumbnail.addEventListener('click', () => {
+                    goToSlide(index);
                 });
-                
-                thumbnailsContainer.appendChild(thumb);
             });
             
             additionalImagesContainer.appendChild(thumbnailsContainer);
-            
-            // Индикаторы (точки)
-            const dotsContainer = document.createElement('div');
-            dotsContainer.className = 'image-dots-container';
-            
-            allImages.forEach((_, index) => {
-                const dot = document.createElement('div');
-                dot.className = `image-dot ${index === 0 ? 'active' : ''}`;
-                dot.dataset.index = index;
-                
-                dot.addEventListener('click', () => {
-                    changeImage(index);
-                });
-                
-                dotsContainer.appendChild(dot);
-            });
-            
-            additionalImagesContainer.appendChild(dotsContainer);
-            
-            // Кнопки навигации
-            const navContainer = document.createElement('div');
-            navContainer.className = 'image-nav-buttons';
-            navContainer.innerHTML = `
-                <button class="nav-btn prev-btn" id="prevImageBtn">
-                    ← Предыдущее
-                </button>
-                <button class="nav-btn next-btn" id="nextImageBtn">
-                    Следующее →
-                </button>
-            `;
-            
-            additionalImagesContainer.appendChild(navContainer);
-            
-            // Функция смены изображения
-            function changeImage(index) {
-                if (index < 0) index = allImages.length - 1;
-                if (index >= allImages.length) index = 0;
-                
-                currentImageIndex = index;
-                document.getElementById('mainDisplayImage').src = allImages[index];
-                document.getElementById('imageCounter').textContent = `Фото ${index + 1} из ${allImages.length}`;
-                
-                // Обновляем активные миниатюры
-                document.querySelectorAll('.image-thumbnail').forEach(thumb => {
-                    const thumbIndex = parseInt(thumb.dataset.index);
-                    thumb.classList.toggle('active', thumbIndex === index);
-                });
-                
-                // Обновляем активные точки
-                document.querySelectorAll('.image-dot').forEach(dot => {
-                    const dotIndex = parseInt(dot.dataset.index);
-                    dot.classList.toggle('active', dotIndex === index);
-                });
-            }
-            
-            // Обработчики кнопок
-            document.getElementById('prevImageBtn').addEventListener('click', () => {
-                changeImage(currentImageIndex - 1);
-            });
-            
-            document.getElementById('nextImageBtn').addEventListener('click', () => {
-                changeImage(currentImageIndex + 1);
-            });
-            
-            // Свайпы для мобильных
-            let touchStartX = 0;
-            let touchEndX = 0;
-            
-            mainImageContainer.addEventListener('touchstart', (e) => {
-                touchStartX = e.changedTouches[0].screenX;
-            });
-            
-            mainImageContainer.addEventListener('touchend', (e) => {
-                touchEndX = e.changedTouches[0].screenX;
-                handleSwipe();
-            });
-            
-            function handleSwipe() {
-                const swipeThreshold = 50;
-                const diff = touchStartX - touchEndX;
-                
-                if (Math.abs(diff) > swipeThreshold) {
-                    if (diff > 0) {
-                        // Свайп влево → следующее фото
-                        changeImage(currentImageIndex + 1);
-                    } else {
-                        // Свайп вправо → предыдущее фото
-                        changeImage(currentImageIndex - 1);
-                    }
-                }
-            }
-            
-            additionalImagesContainer.style.display = 'block';
-        } else {
-            console.log('Нет дополнительных изображений');
-            additionalImagesContainer.style.display = 'none';
-            
-            // Все равно показываем основное фото
-            const mainImageContainer = document.createElement('div');
-            mainImageContainer.className = 'main-product-image';
-            mainImageContainer.innerHTML = `<img src="${product.productImage}" alt="${product.name}">`;
-            additionalImagesContainer.appendChild(mainImageContainer);
-            additionalImagesContainer.style.display = 'block';
         }
+        
+        // Инициализируем слайдер
+        initImageSlider(allImages.length);
     }
     
-    // Остальной код остается...
     // Заполняем объемы
     const volumeOptions = document.getElementById('volumeOptions');
     volumeOptions.innerHTML = '';
@@ -569,6 +501,158 @@ function showProductPage(productId) {
     // Показываем страницу товара и скрываем главную
     productPage.style.display = 'block';
     document.querySelector('.container').style.display = 'none';
+}
+
+// Слайдер фотографий
+let currentSlide = 0;
+let totalSlides = 0;
+let isDragging = false;
+let startPos = 0;
+let currentTranslate = 0;
+let prevTranslate = 0;
+
+function initImageSlider(slidesCount) {
+    totalSlides = slidesCount;
+    currentSlide = 0;
+    
+    const sliderTrack = document.querySelector('.slider-track');
+    const prevArrow = document.querySelector('.slider-arrow.prev');
+    const nextArrow = document.querySelector('.slider-arrow.next');
+    const dots = document.querySelectorAll('.slider-dot');
+    const thumbnails = document.querySelectorAll('.thumbnail-item');
+    
+    if (!sliderTrack) return;
+    
+    // Настройка слайдера
+    sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+    
+    // Обработчики стрелок
+    prevArrow?.addEventListener('click', () => goToSlide(currentSlide - 1));
+    nextArrow?.addEventListener('click', () => goToSlide(currentSlide + 1));
+    
+    // Обработчики точек
+    dots.forEach(dot => {
+        dot.addEventListener('click', () => {
+            const index = parseInt(dot.dataset.index);
+            goToSlide(index);
+        });
+    });
+    
+    // Свайп для мобильных
+    sliderTrack.addEventListener('touchstart', touchStart);
+    sliderTrack.addEventListener('touchmove', touchMove);
+    sliderTrack.addEventListener('touchend', touchEnd);
+    
+    // Клик для десктопов
+    sliderTrack.addEventListener('mousedown', touchStart);
+    sliderTrack.addEventListener('mousemove', touchMove);
+    sliderTrack.addEventListener('mouseup', touchEnd);
+    sliderTrack.addEventListener('mouseleave', touchEnd);
+    
+    // Клавиатура
+    document.addEventListener('keydown', (e) => {
+        if (!productPage.style.display || productPage.style.display === 'none') return;
+        
+        if (e.key === 'ArrowLeft') goToSlide(currentSlide - 1);
+        if (e.key === 'ArrowRight') goToSlide(currentSlide + 1);
+    });
+}
+
+function goToSlide(index) {
+    if (index < 0) index = totalSlides - 1;
+    if (index >= totalSlides) index = 0;
+    
+    currentSlide = index;
+    updateSlider();
+}
+
+function updateSlider() {
+    const sliderTrack = document.querySelector('.slider-track');
+    const dots = document.querySelectorAll('.slider-dot');
+    const thumbnails = document.querySelectorAll('.thumbnail-item');
+    const imageCounter = document.getElementById('imageCounter');
+    
+    if (sliderTrack) {
+        sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+    
+    // Обновляем точки
+    dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentSlide);
+    });
+    
+    // Обновляем миниатюры
+    thumbnails.forEach((thumb, index) => {
+        thumb.classList.toggle('active', index === currentSlide);
+        
+        // Прокручиваем миниатюры, если нужно
+        if (index === currentSlide) {
+            thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+    });
+    
+    // Обновляем счетчик
+    if (imageCounter) {
+        imageCounter.textContent = `${currentSlide + 1} / ${totalSlides}`;
+    }
+}
+
+// Функции для свайпа/перетаскивания
+function touchStart(event) {
+    if (event.type === 'touchstart') {
+        startPos = event.touches[0].clientX;
+    } else {
+        startPos = event.clientX;
+        event.preventDefault(); // Предотвращаем выделение текста
+    }
+    
+    isDragging = true;
+    const sliderTrack = document.querySelector('.slider-track');
+    sliderTrack.style.transition = 'none';
+}
+
+function touchMove(event) {
+    if (!isDragging) return;
+    
+    let currentPosition;
+    if (event.type === 'touchmove') {
+        currentPosition = event.touches[0].clientX;
+    } else {
+        currentPosition = event.clientX;
+    }
+    
+    const diff = currentPosition - startPos;
+    const sliderTrack = document.querySelector('.slider-track');
+    
+    if (sliderTrack) {
+        currentTranslate = prevTranslate + diff;
+        sliderTrack.style.transform = `translateX(calc(-${currentSlide * 100}% + ${currentTranslate}px))`;
+    }
+}
+
+function touchEnd() {
+    if (!isDragging) return;
+    
+    isDragging = false;
+    const sliderTrack = document.querySelector('.slider-track');
+    sliderTrack.style.transition = 'transform 0.3s ease';
+    
+    const movedBy = currentTranslate;
+    
+    // Если свайп был достаточно сильным - меняем слайд
+    if (Math.abs(movedBy) > 50) {
+        if (movedBy > 0) {
+            goToSlide(currentSlide - 1); // Свайп вправо
+        } else {
+            goToSlide(currentSlide + 1); // Свайп влево
+        }
+    } else {
+        // Возвращаем на текущий слайд
+        updateSlider();
+    }
+    
+    prevTranslate = 0;
+    currentTranslate = 0;
 }
 
 // Вспомогательные функции для создания элементов
