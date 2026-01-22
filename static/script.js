@@ -123,6 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Установка разных изображений для товаров в каталоге
+// Установка разных изображений для товаров в каталоге
 function setupCatalogImages() {
     console.log('Устанавливаем изображения для каталога');
     
@@ -144,17 +145,19 @@ function setupCatalogImages() {
             brandElement.textContent = product.brand;
             card.appendChild(brandElement);
             
-            // Устанавливаем цены
+            // Устанавливаем цены В СТОЛБИК
             const priceContainer = card.querySelector('.product-price-container');
             if (priceContainer) {
                 const volume = product.volumes[0]; // Первый объем по умолчанию
                 const discountPercent = Math.round((1 - volume.price / volume.oldPrice) * 100);
                 
                 priceContainer.innerHTML = `
-                    <div class="price-row">
-                        <span class="old-price">${volume.oldPrice.toLocaleString('ru-RU')}₽</span>
-                        <span class="current-price">${volume.price.toLocaleString('ru-RU')}₽</span>
-                        <span class="discount-badge">-${discountPercent}%</span>
+                    <div class="catalog-prices">
+                        <div class="catalog-old-price">${volume.oldPrice.toLocaleString('ru-RU')}₽</div>
+                        <div class="catalog-current-price-row">
+                            <span class="catalog-current-price">${volume.price.toLocaleString('ru-RU')}₽</span>
+                            <span class="catalog-discount">-${discountPercent}%</span>
+                        </div>
                     </div>
                     <div class="product-name">${product.name}</div>
                 `;
@@ -763,11 +766,10 @@ function selectVolume(index) {
         opt.classList.toggle('active', i === index);
     });
     
-    // Обновляем цены
+    // Обновляем цены - БЕЗ СТАРОЙ ЦЕНЫ
     const discountPercent = Math.round((1 - volume.price / volume.oldPrice) * 100);
     document.getElementById('productPagePrice').innerHTML = `
         <div class="product-page-price-row">
-            <span class="product-page-old-price">${volume.oldPrice.toLocaleString('ru-RU')}₽</span>
             <span class="product-page-current-price">${volume.price.toLocaleString('ru-RU')}₽</span>
             <span class="product-page-discount">-${discountPercent}%</span>
         </div>
