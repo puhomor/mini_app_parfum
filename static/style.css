@@ -45,7 +45,7 @@ h1 {
     font-size: 0.8em;
 }
 
-/* Кнопка корзины внизу справа - ПОСТОЯННО НА ВСЕХ СТРАНИЦАХ */
+/* Кнопка корзины внизу справа */
 .cart-floating-btn {
     position: fixed;
     bottom: 20px;
@@ -84,12 +84,12 @@ h1 {
     justify-content: center;
 }
 
-/* КАТАЛОГ (УЖЕ И ВЫШЕ) */
+/* КАТАЛОГ - ОСНОВНОЙ СТИЛЬ */
 .catalog {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
-    width: 90%;
+    width: 100%;
     max-width: 700px;
     margin: 0 auto;
 }
@@ -100,7 +100,7 @@ h1 {
     border-radius: 12px;
     overflow: hidden;
     position: relative;
-    height: 280px; /* УВЕЛИЧИЛ для лучшего отображения */
+    height: 280px;
     cursor: pointer;
     border: 1px solid #1a1a25;
     transition: transform 0.2s;
@@ -127,9 +127,9 @@ h1 {
     z-index: 2;
 }
 
-/* Изображение в каталоге - ИЗМЕНИЛ НА contain ДЛЯ ПОЛНОЙ ВИДИМОСТИ */
+/* Изображение в каталоге */
 .product-image {
-    height: 190px; /* УВЕЛИЧИЛ */
+    height: 190px;
     background: #000;
     display: flex;
     align-items: center;
@@ -139,10 +139,10 @@ h1 {
 }
 
 .product-image img {
-    width: auto; /* АВТО ШИРИНА */
-    height: 100%; /* ВЫСОТА 100% */
-    max-width: 90%; /* МАКСИМУМ 90% ШИРИНЫ */
-    object-fit: contain; /* ПОКАЗЫВАЕМ ВСЕ ИЗОБРАЖЕНИЕ */
+    width: auto;
+    height: 100%;
+    max-width: 90%;
+    object-fit: contain;
     object-position: center;
 }
 
@@ -239,21 +239,6 @@ h1 {
     max-width: 90%;
     object-fit: contain;
     object-position: center;
-}
-
-/* Для вертикальных духов можно добавить адаптивность */
-@media (max-width: 600px) {
-    .product-page-image {
-        height: 300px;
-    }
-    
-    .product-image {
-        height: 200px;
-    }
-    
-    .product-card {
-        height: 270px;
-    }
 }
 
 .product-page-info h1 {
@@ -623,7 +608,9 @@ h1 {
     cursor: not-allowed;
 }
 
-/* ========== МЕДИА-ЗАПРОСЫ ========== */
+/* ========== ИСПРАВЛЕННЫЕ МЕДИА-ЗАПРОСЫ ДЛЯ IPHONE ========== */
+
+/* Для iPhone 16 Pro Max (ширина 430px) и iPhone 14 Plus (428px) */
 @media (max-width: 820px) {
     .container {
         padding-left: 10px;
@@ -636,9 +623,10 @@ h1 {
     }
     
     .catalog {
-        width: 95%;
-        max-width: 650px;
+        width: 100%; /* ИЗМЕНИЛ с 95% на 100% */
+        max-width: 100%; /* ИЗМЕНИЛ с 650px на 100% */
         gap: 10px;
+        padding: 0 5px;
     }
     
     .product-card {
@@ -663,15 +651,17 @@ h1 {
     }
 }
 
-@media (max-width: 600px) {
+/* ТОЛЬКО для очень маленьких экранов (старые iPhone, маленькие Android) */
+@media (max-width: 375px) {
     .catalog {
-        grid-template-columns: 1fr;
-        max-width: 400px;
+        grid-template-columns: 1fr; /* Только на ОЧЕНЬ маленьких экранах */
+        max-width: 340px;
+        margin: 0 auto;
     }
     
     .product-card {
         height: 260px;
-        max-width: 300px;
+        max-width: 340px;
         margin: 0 auto;
     }
     
@@ -690,6 +680,73 @@ h1 {
     
     .product-page-image {
         height: 280px;
+    }
+}
+
+/* Для экранов между 376px и 430px (iPhone 12/13/14/15/16) */
+@media (min-width: 376px) and (max-width: 430px) {
+    .catalog {
+        grid-template-columns: repeat(2, 1fr); /* ВСЕГДА 2 колонки */
+        gap: 8px;
+        width: 100%;
+        max-width: 100%;
+        padding: 0 8px;
+    }
+    
+    .product-card {
+        height: 255px; /* Чуть меньше для лучшего отображения */
+    }
+    
+    .product-image {
+        height: 160px;
+    }
+    
+    .product-price {
+        padding: 10px 8px 3px;
+        font-size: 0.95em;
+    }
+    
+    .product-name {
+        font-size: 0.8em;
+        padding: 0 8px 8px;
+        height: 45px;
+    }
+}
+
+/* Для экранов больше 430px но меньше 600px */
+@media (min-width: 431px) and (max-width: 600px) {
+    .catalog {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        width: 100%;
+        max-width: 100%;
+        padding: 0 10px;
+    }
+    
+    .product-card {
+        height: 265px;
+    }
+    
+    .product-image {
+        height: 170px;
+    }
+}
+
+/* Для экранов от 601px до 820px */
+@media (min-width: 601px) and (max-width: 820px) {
+    .catalog {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        width: 100%;
+        max-width: 700px;
+    }
+    
+    .product-card {
+        height: 270px;
+    }
+    
+    .product-image {
+        height: 180px;
     }
 }
 
@@ -717,4 +774,11 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+/* Дополнительный viewport для Safari iOS */
+@supports (-webkit-touch-callout: none) {
+    body {
+        min-height: -webkit-fill-available;
+    }
 }
