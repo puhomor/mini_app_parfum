@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 # Получаем переменные окружения
 BOT_TOKEN = os.environ.get('BOT_TOKEN', '8228100485:AAEiPlXrFNVHYFbo8VTnDypnERgw5fxlBCc')
-YOUR_TELEGRAM_ID = os.environ.get('YOUR_TELEGRAM_ID', '889038004')
+YOUR_TELEGRAM_ID = os.environ.get('YOUR_TELEGRAM_ID', '8519886219')
 
 # Для отладки
 print(f"App started. BOT_TOKEN: {'Set' if BOT_TOKEN != '8228100485:AAEiPlXrFNVHYFbo8VTnDypnERgw5fxlBCc' else 'Not set'}")

@@ -2,18 +2,10 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Parfum Outlet</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <style>
-        /* Дополнительный фикс для Safari iOS */
-        @supports (-webkit-touch-callout: none) {
-            body {
-                min-height: -webkit-fill-available;
-            }
-        }
-    </style>
 </head>
 <body>
     <div class="container">
@@ -25,42 +17,61 @@
 
         <!-- Каталог -->
         <div class="catalog">
-            <!-- Изображения будут установлены через JavaScript -->
+            <!-- Карточка 1 -->
             <div class="product-card" data-product-id="1">
                 <div class="product-badge">🔥</div>
                 <div class="product-image">
                     <img src="" alt="Creed Aventus">
                 </div>
-                <div class="product-price">42 000₽</div>
-                <div class="product-name">Creed Aventus</div>
+                <div class="product-price-container">
+                    <!-- Цены будут установлены через JS -->
+                </div>
             </div>
 
+            <!-- Карточка 2 -->
             <div class="product-card" data-product-id="2">
                 <div class="product-badge">NEW</div>
                 <div class="product-image">
                     <img src="" alt="Tom Ford">
                 </div>
-                <div class="product-price">38 000₽</div>
-                <div class="product-name">Tom Ford Noir</div>
+                <div class="product-price-container">
+                    <!-- Цены будут установлены через JS -->
+                </div>
             </div>
 
+            <!-- Карточка 3 -->
             <div class="product-card" data-product-id="3">
                 <div class="product-badge">🔥</div>
                 <div class="product-image">
                     <img src="" alt="Dior">
                 </div>
-                <div class="product-price">36 000₽</div>
-                <div class="product-name">Dior Sauvage</div>
+                <div class="product-price-container">
+                    <!-- Цены будут установлены через JS -->
+                </div>
             </div>
 
+            <!-- Карточка 4 -->
             <div class="product-card" data-product-id="4">
                 <div class="product-badge">⭐</div>
                 <div class="product-image">
                     <img src="" alt="Chanel">
                 </div>
-                <div class="product-price">34 000₽</div>
-                <div class="product-name">Chanel Bleu</div>
+                <div class="product-price-container">
+                    <!-- Цены будут установлены через JS -->
+                </div>
             </div>
+
+            <!-- КАК ДОБАВЛЯТЬ НОВЫЕ КАРТОЧКИ:
+            <div class="product-card" data-product-id="5">
+                <div class="product-badge">NEW</div>
+                <div class="product-image">
+                    <img src="" alt="Название товара">
+                </div>
+                <div class="product-price-container">
+                    Цены будут установлены через JS
+                </div>
+            </div>
+            -->
         </div>
     </div>
 
@@ -84,9 +95,21 @@
                 <img id="productPageImage" src="" alt="">
             </div>
             
+            <!-- Дополнительные фото - ЭТОТ КОНТЕЙНЕР ДОЛЖЕН БЫТЬ -->
+            <div class="product-images-section" id="productImagesSection">
+                <!-- Здесь будет:
+                1. Большое основное фото
+                2. Миниатюры внизу
+                3. Кнопки навигации
+                4. Счетчик фото
+                -->
+            </div>
+            
             <div class="product-page-info">
                 <h1 id="productPageName">Название товара</h1>
-                <div class="product-page-price" id="productPagePrice">0₽</div>
+                <div id="productPagePrice">
+                    <!-- Цена будет установлена через JS -->
+                </div>
                 
                 <div class="product-page-description" id="productPageDescription">
                     Описание товара появится здесь
@@ -106,7 +129,6 @@
             </div>
         </div>
     </div>
-
     <!-- Модальное окно корзины -->
     <div class="cart-modal" id="cartModal">
         <div class="cart-content">

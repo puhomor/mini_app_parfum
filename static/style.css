@@ -100,7 +100,7 @@ h1 {
     border-radius: 12px;
     overflow: hidden;
     position: relative;
-    height: 280px;
+    height: 320px; /* УВЕЛИЧИЛ для старой и новой цены */
     cursor: pointer;
     border: 1px solid #1a1a25;
     transition: transform 0.2s;
@@ -146,12 +146,14 @@ h1 {
     object-position: center;
 }
 
+/* НЕВИДИМОЕ ПОЛЕ ДЛЯ ПОИСКА */
+.product-brand {
+    display: none; /* Скрыто от пользователя, но доступно для JS */
+}
+
 /* Цена и название */
-.product-price {
-    color: #00bfff;
-    font-size: 1em;
-    font-weight: bold;
-    padding: 12px 10px 5px;
+.product-price-container {
+    padding: 10px 10px 5px;
     text-align: center;
     flex-shrink: 0;
 }
@@ -159,14 +161,45 @@ h1 {
 .product-name {
     color: #ffffff;
     font-size: 0.85em;
-    padding: 0 10px 10px;
+    padding: 0 10px 5px;
     text-align: center;
     line-height: 1.3;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 50px;
+    height: 45px;
     flex-shrink: 0;
+}
+
+/* СТАРАЯ И НОВАЯ ЦЕНА */
+.price-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 5px;
+}
+
+.old-price {
+    color: #666;
+    text-decoration: line-through;
+    font-size: 0.9em;
+}
+
+.current-price {
+    color: #00bfff;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.discount-badge {
+    background: #ff0080;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-size: 0.7em;
+    font-weight: bold;
+    margin-left: 5px;
 }
 
 /* ========== СТРАНИЦА КАРТОЧКИ ТОВАРА ========== */
@@ -241,17 +274,71 @@ h1 {
     object-position: center;
 }
 
+/* Дополнительные фото духов */
+.additional-images {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    scrollbar-width: thin;
+}
+
+.additional-image {
+    width: 80px;
+    height: 80px;
+    background: #000;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.2s;
+}
+
+.additional-image.active {
+    border-color: #00bfff;
+}
+
+.additional-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Цена в карточке товара */
+.product-page-price-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.product-page-old-price {
+    color: #666;
+    text-decoration: line-through;
+    font-size: 1.1em;
+}
+
+.product-page-current-price {
+    color: #00bfff;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.product-page-discount {
+    background: #ff0080;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
 .product-page-info h1 {
     font-size: 1.3em;
     margin-bottom: 10px;
     color: #ffffff;
-}
-
-.product-page-price {
-    color: #00bfff;
-    font-size: 1.4em;
-    font-weight: bold;
-    margin-bottom: 20px;
 }
 
 .product-page-description {
@@ -608,7 +695,7 @@ h1 {
     cursor: not-allowed;
 }
 
-/* ========== ИСПРАВЛЕННЫЕ МЕДИА-ЗАПРОСЫ ДЛЯ IPHONE ========== */
+/* ========== МЕДИА-ЗАПРОСЫ ========== */
 
 /* Для iPhone 16 Pro Max (ширина 430px) и iPhone 14 Plus (428px) */
 @media (max-width: 820px) {
@@ -623,14 +710,14 @@ h1 {
     }
     
     .catalog {
-        width: 100%; /* ИЗМЕНИЛ с 95% на 100% */
-        max-width: 100%; /* ИЗМЕНИЛ с 650px на 100% */
+        width: 100%;
+        max-width: 100%;
         gap: 10px;
         padding: 0 5px;
     }
     
     .product-card {
-        height: 270px;
+        height: 310px;
     }
     
     .product-image {
@@ -651,16 +738,16 @@ h1 {
     }
 }
 
-/* ТОЛЬКО для очень маленьких экранов (старые iPhone, маленькие Android) */
+/* ТОЛЬКО для очень маленьких экранов */
 @media (max-width: 375px) {
     .catalog {
-        grid-template-columns: 1fr; /* Только на ОЧЕНЬ маленьких экранах */
+        grid-template-columns: 1fr;
         max-width: 340px;
         margin: 0 auto;
     }
     
     .product-card {
-        height: 260px;
+        height: 300px;
         max-width: 340px;
         margin: 0 auto;
     }
@@ -683,10 +770,10 @@ h1 {
     }
 }
 
-/* Для экранов между 376px и 430px (iPhone 12/13/14/15/16) */
+/* Для экранов между 376px и 430px */
 @media (min-width: 376px) and (max-width: 430px) {
     .catalog {
-        grid-template-columns: repeat(2, 1fr); /* ВСЕГДА 2 колонки */
+        grid-template-columns: repeat(2, 1fr);
         gap: 8px;
         width: 100%;
         max-width: 100%;
@@ -694,41 +781,16 @@ h1 {
     }
     
     .product-card {
-        height: 255px; /* Чуть меньше для лучшего отображения */
+        height: 295px;
     }
     
     .product-image {
         height: 160px;
     }
     
-    .product-price {
-        padding: 10px 8px 3px;
-        font-size: 0.95em;
-    }
-    
     .product-name {
         font-size: 0.8em;
-        padding: 0 8px 8px;
         height: 45px;
-    }
-}
-
-/* Для экранов больше 430px но меньше 600px */
-@media (min-width: 431px) and (max-width: 600px) {
-    .catalog {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-        width: 100%;
-        max-width: 100%;
-        padding: 0 10px;
-    }
-    
-    .product-card {
-        height: 265px;
-    }
-    
-    .product-image {
-        height: 170px;
     }
 }
 
@@ -742,7 +804,7 @@ h1 {
     }
     
     .product-card {
-        height: 270px;
+        height: 310px;
     }
     
     .product-image {
@@ -781,4 +843,171 @@ body {
     body {
         min-height: -webkit-fill-available;
     }
+}
+
+/* СТИЛИ ДЛЯ ДОПОЛНИТЕЛЬНЫХ ФОТО (ЯРКИЕ) */
+
+/* Контейнер для миниатюр */
+.additional-images-container {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding: 15px;
+    margin-bottom: 20px;
+    background: rgba(20, 20, 30, 0.9);
+    border-radius: 12px;
+    border: 2px solid #00bfff;
+    min-height: 120px;
+}
+
+/* Миниатюры фото */
+.image-thumbnail {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 3px solid #333;
+    transition: all 0.3s;
+    flex-shrink: 0;
+    position: relative;
+    background: #000;
+}
+
+.image-thumbnail.active {
+    border-color: #00bfff;
+    box-shadow: 0 0 15px rgba(0, 191, 255, 0.5);
+    transform: scale(1.05);
+}
+
+.image-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Номер на миниатюре */
+.thumbnail-number {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    font-size: 0.7em;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+/* Индикаторы (точки) */
+.image-dots-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 15px 0;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+}
+
+.image-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #333;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.image-dot.active {
+    background: #00bfff;
+    transform: scale(1.2);
+    box-shadow: 0 0 10px #00bfff;
+}
+
+/* Кнопки навигации */
+.image-nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    gap: 15px;
+}
+
+.nav-btn {
+    flex: 1;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s;
+}
+
+.prev-btn {
+    background: linear-gradient(45deg, #1a1a2a, #00bfff);
+    color: white;
+    border: 2px solid #00bfff;
+}
+
+.next-btn {
+    background: linear-gradient(45deg, #2a1a2a, #ff0080);
+    color: white;
+    border: 2px solid #ff0080;
+}
+
+.nav-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(0, 191, 255, 0.3);
+}
+
+/* Подпись под фото */
+.image-counter {
+    text-align: center;
+    color: #00bfff;
+    font-size: 0.9em;
+    margin-top: 10px;
+    padding: 8px;
+    background: rgba(0, 191, 255, 0.1);
+    border-radius: 8px;
+}
+
+/* Большое основное фото */
+.main-product-image {
+    width: 100%;
+    height: 350px;
+    background: #000;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border: 3px solid #00bfff;
+    box-shadow: 0 0 25px rgba(0, 191, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-product-image img {
+    max-width: 90%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* Заголовок для блока фото */
+.images-section-title {
+    color: #ff0080;
+    font-size: 1.1em;
+    margin: 20px 0 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.images-section-title::before {
+    content: "📸";
+    font-size: 1.2em;
 }
