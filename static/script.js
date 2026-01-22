@@ -69,24 +69,72 @@ const products = {
         ],
         badge: "⭐"
     },
-    // КАК ДОБАВЛЯТЬ НОВЫЕ ТОВАРЫ:
-    // 5: {
-    //     brand: "Название бренда",
-    //     name: "Название товара",
-    //     description: "Описание товара",
-    //     volumes: [
-    //         { size: "50ml", price: ЦЕНА, oldPrice: СТАРАЯ_ЦЕНА },
-    //         { size: "100ml", price: ЦЕНА, oldPrice: СТАРАЯ_ЦЕНА }
-    //     ],
-    //     catalogImage: "/static/images/ИМЯ_ФАЙЛА.tiff",
-    //     productImage: "/static/images/ИМЯ_ФАЙЛА.tiff",
-    //     additionalImages: [
-    //         "/static/images/ИМЯ_ФАЙЛА_1.tiff",
-    //         "/static/images/ИМЯ_ФАЙЛА_2.tiff"
-    //     ],
-    //     badge: "🔥" // или "NEW", "⭐", etc.
-    // },
-    // Дублируйте этот блок и меняйте цифру и данные
+    5: {
+        brand: "Название бренда",
+        name: "Название товара",
+        description: "Описание товара",
+        volumes: [
+            { size: "50ml", price: 10000, oldPrice: 15000 },
+            { size: "100ml", price: 15000, oldPrice: 25000 }
+        ],
+        catalogImage: "/static/images/51.WEBP",
+        productImage: "/static/images/51.WEBP",
+        additionalImages: [
+            "/static/images/52.WEBP",
+            "/static/images/53.WEBP",
+            "/static/images/54.WEBP"
+        ],
+        badge: "🔥" // или "NEW", "⭐", etc.
+    },
+    6: {
+        brand: "Название бренда",
+        name: "Название товара",
+        description: "Описание товара",
+        volumes: [
+            { size: "50ml", price: 10000, oldPrice: 15000 },
+            { size: "100ml", price: 15000, oldPrice: 25000 }
+        ],
+        catalogImage: "/static/images/61.WEBP",
+        productImage: "/static/images/61.WEBP",
+        additionalImages: [
+            "/static/images/62.WEBP"
+        ],
+        badge: "🔥" // или "NEW", "⭐", etc.
+    },
+
+    7: {
+        brand: "Название бренда",
+        name: "Название товара",
+        description: "Описание товара",
+        volumes: [
+            { size: "50ml", price: 10000, oldPrice: 15000 },
+            { size: "100ml", price: 15000, oldPrice: 25000 }
+        ],
+        catalogImage: "/static/images/71.WEBP",
+        productImage: "/static/images/71.WEBP",
+        additionalImages: [
+            "/static/images/72.WEBP",
+            "/static/images/73.WEBP",
+            "/static/images/74.WEBP"
+        ],
+        badge: "🔥" // или "NEW", "⭐", etc.
+    },
+
+    8: {
+        brand: "Название бренда",
+        name: "Название товара",
+        description: "Описание товара",
+        volumes: [
+            { size: "50ml", price: 10000, oldPrice: 15000 },
+            { size: "100ml", price: 15000, oldPrice: 25000 }
+        ],
+        catalogImage: "/static/images/81.WEBP",
+        productImage: "/static/images/81.WEBP",
+        additionalImages: [
+            "/static/images/82.WEBP"
+        ],
+        badge: "🔥" // или "NEW", "⭐", etc.
+    },
 };
 
 // Глобальные переменные
