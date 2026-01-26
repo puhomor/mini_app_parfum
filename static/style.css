@@ -109,6 +109,19 @@ h1 {
     flex-direction: column;
 }
 
+.product-page-description {
+    white-space: pre-line; /* ЭТО ВСЁ, ЧТО НУЖНО! */
+    /* остальные стили оставь как есть */
+    color: #a0a0c0;
+    font-size: 0.9em;
+    line-height: 1.4;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #0f0f15;
+    border-radius: 10px;
+    border-left: 3px solid #00bfff;
+}
+
 .product-card:active {
     transform: scale(0.98);
 }
@@ -130,7 +143,7 @@ h1 {
 /* Изображение в каталоге - УМЕНЬШЕНА ВЫСОТА */
 .product-image {
     height: 160px; /* УМЕНЬШЕННАЯ высота */
-    background: #000;
+    background: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
