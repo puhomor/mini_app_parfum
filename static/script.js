@@ -19,7 +19,8 @@ const products = {
             "/static/images/13.jpg",
             "/static/images/12.jpg"
         ],
-        badge: "🔥"
+        badge: "🔥",
+        retailerLink: "https://www.letu.ru/product/cerutti-1881-tualetnaya-voda-1881-pour-femme/155400333/sku/170800550"
     },
     2: {
         brand: "Cacharel",
@@ -33,7 +34,8 @@ const products = {
         additionalImages: [
             "/static/images/22.jpg"
         ],
-        badge: "NEW"
+        badge: "NEW",
+        retailerLink: "https://www.letu.ru/product/cacharel-zhenskaya-tualetnaya-voda-noa/153500274/sku/168900534"
     },
     3: {
         brand: "Calvin Klein",
@@ -48,7 +50,8 @@ const products = {
             "/static/images/34.png",
             "/static/images/32.jpg"
         ],
-        badge: "🔥"
+        badge: "🔥",
+        retailerLink: "https://www.letu.ru/product/calvin-klein-parfyumernaya-voda-truth/167900118"
     },
     4: {
         brand: "Calvin Klein",
@@ -64,10 +67,11 @@ const products = {
             "/static/images/43.WEBP",
             "/static/images/44.WEBP"
         ],
-        badge: "⭐"
+        badge: "⭐",
+        retailerLink: "https://goldapple.ru/80116000003-eternity-air-for-women/"
     },
     5: {
-        brand: "Lanvin",
+        brand: "LANVIN",
         name: "Lanvin Eclat D'Arpege, 100ml",
         description: "Верхние ноты\nЗеленая сирень, листья сицилийского лимона, чай\n\nНоты сердца\nПион, китайский османтус, глициния (вистерия), цветок персика, зеленый чай\n\nБазовые ноты\nБелый мускус, амбра, ливанский кедр",
         volumes: [
@@ -80,7 +84,8 @@ const products = {
             "/static/images/53.WEBP",
             "/static/images/54.WEBP"
         ],
-        badge: "🔥" // или "NEW", "⭐", etc.
+        badge: "🔥",
+        retailerLink: "https://goldapple.ru/7330400003-eclat-d-arpege/"
     },
     6: {
         brand: "Guerlain",
@@ -94,7 +99,8 @@ const products = {
         additionalImages: [
             "/static/images/62.WEBP"
         ],
-        badge: "🔥" // или "NEW", "⭐", etc.
+        badge: "🔥",
+        retailerLink: "https://randewoo.ru/product/guerlain-lui?ysclid=mkp5ymju7w973006428&utm_source=yandex.ru&utm_medium=organic&utm_campaign=yandex.ru&utm_referrer=yandex.ru"
     },
 
     7: {
@@ -111,7 +117,8 @@ const products = {
             "/static/images/73.WEBP",
             "/static/images/74.WEBP"
         ],
-        badge: "🔥" // или "NEW", "⭐", etc.
+        badge: "🔥",
+        retailerLink: "https://www.letu.ru/product/lalique-l-amour/3900046"
     },
 
     8: {
@@ -126,9 +133,59 @@ const products = {
         additionalImages: [
             "/static/images/82.WEBP"
         ],
-        badge: "🔥" // или "NEW", "⭐", etc.
+        badge: "🔥",
+        retailerLink: "https://goldapple.ru/26731900002-black-saffron/"
     },
 };
+
+// Функция для создания описания товара
+function createProductDescription(product) {
+    const description = product.description || '';
+    const retailerLink = product.retailerLink || ''; // Берем ссылку из данных товара
+    
+    let html = '';
+    
+    // 1. Ссылка на ритейлера (если есть)
+    if (retailerLink) {
+        html += `<div class="retailer-info">
+            <div class="retailer-title">Эти же духи в ритейле:</div>
+            <a href="${retailerLink}" target="_blank" class="retailer-link">
+                ${retailerLink}
+            </a>
+            <div class="retailer-note">(цена в 1.5-2 раза выше нашей)</div>
+        </div>`;
+    }
+    
+    // 2. Ноты (если есть)
+    if (description) {
+        html += `<div class="notes-section">
+            <div class="notes-title">Пирамида аромата:</div>
+            <div class="notes-content">${formatNotes(description)}</div>
+        </div>`;
+    }
+    
+    return html;
+}
+
+// Функция для форматирования нот
+function formatNotes(description) {
+    // Разбиваем на строки по \n
+    const lines = description.split('\n');
+    let html = '';
+    
+    lines.forEach(line => {
+        if (line.trim()) {
+            // Если строка содержит "ноты" или "нота" - делаем заголовком
+            if (line.toLowerCase().includes('ноты') || line.toLowerCase().includes('нота')) {
+                html += `<div class="note-category">${line}</div>`;
+            } else {
+                html += `<div class="note-item">${line}</div>`;
+            }
+        }
+    });
+    
+    return html;
+}
 
 // Глобальные переменные
 let cart = [];
@@ -411,7 +468,9 @@ function showProductPage(productId) {
     // Заполняем данные
     document.getElementById('productPageTitle').textContent = product.name;
     document.getElementById('productPageName').textContent = product.name;
-    document.getElementById('productPageDescription').textContent = product.description;
+    // Устанавливаем описание с ссылкой на ритейлера и нотами
+    const descriptionElement = document.getElementById('productPageDescription');
+    descriptionElement.innerHTML = createProductDescription(product);
     
     // Создаем слайдер с фотографиями
     const additionalImagesContainer = document.getElementById('productImagesSection');
@@ -521,19 +580,16 @@ function showProductPage(productId) {
     }
     
     // Заполняем объемы
+    // Заполняем объемы - ТОЛЬКО ОБЪЕМ И НОВАЯ ЦЕНА
     const volumeOptions = document.getElementById('volumeOptions');
     volumeOptions.innerHTML = '';
     
     product.volumes.forEach((volume, index) => {
-        const discountPercent = Math.round((1 - volume.price / volume.oldPrice) * 100);
-        
         const option = document.createElement('div');
         option.className = `volume-option ${index === 0 ? 'active' : ''}`;
         option.innerHTML = `
-            <div>${volume.size}</div>
-            <div style="font-size: 0.8em; color: #666; text-decoration: line-through;">${volume.oldPrice.toLocaleString('ru-RU')}₽</div>
-            <div style="color: #00bfff; font-weight: bold;">${volume.price.toLocaleString('ru-RU')}₽</div>
-            <div style="font-size: 0.7em; color: #ff0080;">-${discountPercent}%</div>
+            <div class="volume-size">${volume.size}</div>
+            <div class="volume-price">${volume.price.toLocaleString('ru-RU')}₽</div>
         `;
         option.addEventListener('click', () => selectVolume(index));
         volumeOptions.appendChild(option);
@@ -807,12 +863,12 @@ function selectVolume(index) {
         opt.classList.toggle('active', i === index);
     });
     
-    // Обновляем цены - БЕЗ СТАРОЙ ЦЕНЫ
-    const discountPercent = Math.round((1 - volume.price / volume.oldPrice) * 100);
+    // Обновляем цены - ТОЛЬКО НОВАЯ ЦЕНА БЕЗ СТАРОЙ
     document.getElementById('productPagePrice').innerHTML = `
         <div class="product-page-price-row">
+            <span class="product-page-old-price">${volume.oldPrice.toLocaleString('ru-RU')}₽</span>
             <span class="product-page-current-price">${volume.price.toLocaleString('ru-RU')}₽</span>
-            <span class="product-page-discount">-${discountPercent}%</span>
+            <span class="product-page-discount">-${Math.round((1 - volume.price / volume.oldPrice) * 100)}%</span>
         </div>
     `;
 }

@@ -109,17 +109,111 @@ h1 {
     flex-direction: column;
 }
 
+/* ========== ОПИСАНИЕ ТОВАРА ========== */
+
 .product-page-description {
-    white-space: pre-line; /* ЭТО ВСЁ, ЧТО НУЖНО! */
-    /* остальные стили оставь как есть */
     color: #a0a0c0;
     font-size: 0.9em;
     line-height: 1.4;
     margin-bottom: 20px;
-    padding: 15px;
-    background: #0f0f15;
+}
+
+/* Секция с ритейлером */
+.retailer-info {
+    background: rgba(255, 0, 128, 0.1);
+    border: 1px solid #ff0080;
     border-radius: 10px;
-    border-left: 3px solid #00bfff;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.retailer-title {
+    color: #ff0080;
+    font-weight: bold;
+    font-size: 0.95em;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.retailer-title::before {
+    content: "💰";
+}
+
+.retailer-link {
+    color: #00bfff;
+    font-size: 0.85em;
+    word-break: break-all;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 5px;
+    border-bottom: 1px dashed #00bfff;
+}
+
+.retailer-link:hover {
+    color: #ff0080;
+    border-bottom-color: #ff0080;
+}
+
+.retailer-note {
+    color: #a0a0c0;
+    font-size: 0.8em;
+    font-style: italic;
+}
+
+/* Секция с нотами */
+.notes-section {
+    background: rgba(0, 191, 255, 0.1);
+    border: 1px solid #00bfff;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.notes-title {
+    color: #00bfff;
+    font-weight: bold;
+    font-size: 0.95em;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.notes-title::before {
+    content: "🌸";
+}
+
+/* Категории нот (Верхние ноты, Ноты сердца и т.д.) */
+.note-category {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 0.9em;
+    margin-top: 15px;
+    margin-bottom: 8px;
+    padding-left: 10px;
+    border-left: 3px solid #ff0080;
+}
+
+.note-category:first-child {
+    margin-top: 0;
+}
+
+/* Элементы нот */
+.note-item {
+    color: #a0a0c0;
+    font-size: 0.85em;
+    margin-bottom: 5px;
+    padding-left: 15px;
+    line-height: 1.4;
+    position: relative;
+}
+
+.note-item::before {
+    content: "•";
+    color: #00bfff;
+    position: absolute;
+    left: 5px;
 }
 
 .product-card:active {
@@ -984,4 +1078,88 @@ body {
     body {
         min-height: -webkit-fill-available;
     }
+}
+
+/* ========== ЦЕНЫ В КАРТОЧКЕ ТОВАРА ========== */
+
+/* Контейнер для цены с СТАРОЙ и НОВОЙ ценой */
+.product-page-price-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+/* Старая цена (перечеркнутая) */
+.product-page-old-price {
+    color: #666;
+    text-decoration: line-through;
+    font-size: 1.1em;
+}
+
+/* Новая цена (большая) */
+.product-page-current-price {
+    color: #00bfff;
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+/* Скидка */
+.product-page-discount {
+    background: #ff0080;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+/* ========== ОПЦИИ ОБЪЕМА В КАРТОЧКЕ ТОВАРА ========== */
+
+/* Размер объема */
+.volume-size {
+    font-size: 1em;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #ffffff;
+}
+
+/* Цена объема */
+.volume-price {
+    color: #00bfff;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+/* Убираем старую цену и скидку из опций объема */
+.volume-option {
+    flex: 1;
+    padding: 12px;
+    background: #0f0f15;
+    border: 1px solid #1a1a25;
+    border-radius: 8px;
+    color: #a0a0c0;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.9em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.volume-option.active {
+    border-color: #00bfff;
+    background: rgba(0, 191, 255, 0.1);
+    color: #00bfff;
+}
+
+.volume-option.active .volume-size {
+    color: #00bfff;
+}
+
+.volume-option.active .volume-price {
+    color: #00bfff;
 }
