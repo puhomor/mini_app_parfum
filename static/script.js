@@ -42,7 +42,7 @@ const products = {
         name: "Calvin Klein Truth, 100ml",
         description: "Верхние ноты\nБамбук, Клевер, Бергамот, Ветивер, Лимон и Пачули\n\nНоты сердца\nЛилия, Пион, Сандал, Мимоза, Цветок шелкового дерева и Ежевика",
         volumes: [
-            { size: "100ml", price: 3400, oldPrice: 5000 }
+            { size: "100ml", price: 3500, oldPrice: 5000 }
         ],
         catalogImage: "/static/images/33.png",
         productImage: "/static/images/33.png",
@@ -58,7 +58,7 @@ const products = {
         name: "Calvin Klein Eternity Air For Women, 100ml",
         description: "Верхняя нота\nНебесный Аккорд, Грейпфрут\n\nНота сердца\nГруша, Пион, Ландыш\n\nБазовая нота\nКедр, Мускус, Серая амбра",
         volumes: [
-            { size: "100ml", price: 5900, oldPrice: 8700 }
+            { size: "100ml", price: 6100, oldPrice: 8700 }
         ],
         catalogImage: "/static/images/41.WEBP",
         productImage: "/static/images/41.WEBP",
@@ -75,7 +75,7 @@ const products = {
         name: "Lanvin Eclat D'Arpege, 100ml",
         description: "Верхние ноты\nЗеленая сирень, листья сицилийского лимона, чай\n\nНоты сердца\nПион, китайский османтус, глициния (вистерия), цветок персика, зеленый чай\n\nБазовые ноты\nБелый мускус, амбра, ливанский кедр",
         volumes: [
-            { size: "100ml", price: 6200, oldPrice: 9930 }
+            { size: "100ml", price: 6960, oldPrice: 9930 }
         ],
         catalogImage: "/static/images/51.WEBP",
         productImage: "/static/images/51.WEBP",
@@ -92,7 +92,7 @@ const products = {
         name: "Guerlain LUI, 50ml",
         description: "Верхние ноты\nГруша (свежесть, сочность) и Бергамот\n\nСредние ноты (сердце)\nБензоин, Гвоздика\n\nБазовые ноты\nКожа, Дым, Ваниль, Древесные ноты, Мускус",
         volumes: [
-            { size: "50ml", price: 17000, oldPrice: 27000 }
+            { size: "50ml", price: 18900, oldPrice: 27000 }
         ],
         catalogImage: "/static/images/61.WEBP",
         productImage: "/static/images/61.WEBP",
@@ -108,7 +108,7 @@ const products = {
         name: "LALIQUE L'Amour, 30ml",
         description: "Верхние ноты\nШафран, ягоды можжевельника, китайский грейпфрут (или помело)\n\nНоты сердца (средние)\nЧерная фиалка, кожа, иногда отмечается роза\n\nБазовые ноты\nМалина, ветивер, кашмеран",
         volumes: [
-            { size: "30ml", price: 5300, oldPrice: 7900 }
+            { size: "30ml", price: 5520, oldPrice: 7900 }
         ],
         catalogImage: "/static/images/71.WEBP",
         productImage: "/static/images/71.WEBP",
@@ -126,7 +126,7 @@ const products = {
         name: "BYREDO black saffron, 50ml",
         description: "Верхние ноты\nКожи, Шафран\n\nНоты сердца\nГелиотроп, Фиалка\n\nБазовые ноты\nДревесные ноты, Малина, Кедр",
         volumes: [
-            { size: "50ml", price: 13500, oldPrice: 19483 }
+            { size: "50ml", price: 13640, oldPrice: 19483 }
         ],
         catalogImage: "/static/images/81.WEBP",
         productImage: "/static/images/81.WEBP",
@@ -135,6 +135,38 @@ const products = {
         ],
         badge: "🔥",
         retailerLink: "https://goldapple.ru/26731900002-black-saffron/"
+    },
+
+    9: {
+        brand: "KILIAN",
+        name: "KILIAN PARIS Born To Be Unforgettable, 50ml",
+        description: "Верхние ноты\nКожи, Шафран\n\nНоты сердца\nГелиотроп, Фиалка\n\nБазовые ноты\nДревесные ноты, Малина, Кедр",
+        volumes: [
+            { size: "50ml", price: 9650, oldPrice: 13770 }
+        ],
+        catalogImage: "/static/images/91.jpg",
+        productImage: "/static/images/91.jpg",
+        additionalImages: [
+            "/static/images/92.jpg"
+        ],
+        badge: "🔥",
+        retailerLink: "https://www.letu.ru/product/kilian-paris-born-to-be-unforgettable/153700592/sku/169100777"
+    },
+
+    10: {
+        brand: "JIMMY CHOO",
+        name: "JIMMY CHOO Floral, 90ml",
+        description: "Верхние ноты\nКожи, Шафран\n\nНоты сердца\nГелиотроп, Фиалка\n\nБазовые ноты\nДревесные ноты, Малина, Кедр",
+        volumes: [
+            { size: "50ml", price: 7800, oldPrice: 11150 }
+        ],
+        catalogImage: "/static/images/101.jpg",
+        productImage: "/static/images/101.jpg",
+        additionalImages: [
+            "/static/images/102.jpg"
+        ],
+        badge: "🔥",
+        retailerLink: "https://www.letu.ru/product/jimmy-choo-floral/71200029/sku/85600036"
     },
 };
 
