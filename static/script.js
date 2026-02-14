@@ -27,7 +27,7 @@ const products = {
         name: "Cacharel Noa, 50ml",
         description: "Верхние ноты\nБелый мускус, Пион, Фрезия, Зеленые ноты, Персик, Слива\n\nНоты сердца\nЛилия, Ландыш, Зеленая трава, Жасмин, Иланг-иланг, Роза\n\nБазовые ноты\nКофе, Ваниль, Сандал, Кориандр, Ладан, Бобы тонка, Кедр",
         volumes: [
-            { size: "50ml", price: 3290, oldPrice: 4700 }
+            { size: "50ml", price: 3500, oldPrice: 4700 }
         ],
         catalogImage: "/static/images/21.jpg",
         productImage: "/static/images/21.jpg",
@@ -42,7 +42,7 @@ const products = {
         name: "Calvin Klein Truth, 100ml",
         description: "Верхние ноты\nБамбук, Клевер, Бергамот, Ветивер, Лимон и Пачули\n\nНоты сердца\nЛилия, Пион, Сандал, Мимоза, Цветок шелкового дерева и Ежевика",
         volumes: [
-            { size: "100ml", price: 3500, oldPrice: 5000 }
+            { size: "100ml", price: 3800, oldPrice: 5000 }
         ],
         catalogImage: "/static/images/33.png",
         productImage: "/static/images/33.png",
@@ -58,7 +58,7 @@ const products = {
         name: "Calvin Klein Eternity Air For Women, 100ml",
         description: "Верхняя нота\nНебесный Аккорд, Грейпфрут\n\nНота сердца\nГруша, Пион, Ландыш\n\nБазовая нота\nКедр, Мускус, Серая амбра",
         volumes: [
-            { size: "100ml", price: 6100, oldPrice: 8700 }
+            { size: "100ml", price: 6450, oldPrice: 8700 }
         ],
         catalogImage: "/static/images/41.WEBP",
         productImage: "/static/images/41.WEBP",
@@ -140,7 +140,7 @@ const products = {
     9: {
         brand: "KILIAN",
         name: "KILIAN PARIS Born To Be Unforgettable, 50ml",
-        description: "Верхние ноты\nКожи, Шафран\n\nНоты сердца\nГелиотроп, Фиалка\n\nБазовые ноты\nДревесные ноты, Малина, Кедр",
+        description: "Верхние ноты\nБергамот, Грейпфрут, Мандарин\n\nНоты сердца\nГерань, Лаванда, Шалфей мускатный\n\nБазовые ноты\nПачули, Ветивер, Дубовый мох",
         volumes: [
             { size: "50ml", price: 9650, oldPrice: 13770 }
         ],
@@ -156,9 +156,9 @@ const products = {
     10: {
         brand: "JIMMY CHOO",
         name: "JIMMY CHOO Floral, 90ml",
-        description: "Верхние ноты\nКожи, Шафран\n\nНоты сердца\nГелиотроп, Фиалка\n\nБазовые ноты\nДревесные ноты, Малина, Кедр",
+        description: "Верхние ноты\nМандарин, Бергамот\n\nНоты сердца\nФрезия, Жасмин, Нектарин\n\nБазовые ноты\nКедр, Корица, Мускус",
         volumes: [
-            { size: "50ml", price: 7800, oldPrice: 11150 }
+            { size: "90ml", price: 7800, oldPrice: 11150 }
         ],
         catalogImage: "/static/images/101.jpg",
         productImage: "/static/images/101.jpg",
@@ -167,6 +167,24 @@ const products = {
         ],
         badge: "🔥",
         retailerLink: "https://www.letu.ru/product/jimmy-choo-floral/71200029/sku/85600036"
+    },
+
+    11: {
+        brand: "BANDERAS",
+        name: "BANDERAS Blue Seduction, 100ml",
+        description: "Верхние ноты\nАрбуз, Огурец, Бергамот, Мандарин\n\nНоты сердца\nАнанас, Дыня, Водные ноты, Базилик\n\nБазовые ноты\nМускус, Древесные ноты, Амбра",
+        volumes: [
+            { size: "100ml", price: 2800, oldPrice: 3550 }
+        ],
+        catalogImage: "/static/images/111.jpg",
+        productImage: "/static/images/111.jpg",
+        additionalImages: [
+            "/static/images/114.jpg",
+            "/static/images/113.jpg",
+            "/static/images/112.jpg"
+        ],
+        badge: "🔥",
+        retailerLink: "https://www.letu.ru/product/antonio-banderas-blue-seduction-for-men/11288/sku/43583"
     },
 };
 
@@ -199,23 +217,26 @@ function createProductDescription(product) {
     return html;
 }
 
-// Функция для форматирования нот
 function formatNotes(description) {
-    // Разбиваем на строки по \n
     const lines = description.split('\n');
     let html = '';
-    
-    lines.forEach(line => {
-        if (line.trim()) {
-            // Если строка содержит "ноты" или "нота" - делаем заголовком
-            if (line.toLowerCase().includes('ноты') || line.toLowerCase().includes('нота')) {
-                html += `<div class="note-category">${line}</div>`;
-            } else {
-                html += `<div class="note-item">${line}</div>`;
-            }
+    for (let i = 0; i < lines.length; i++) {
+        const line = lines[i].trim();
+        if (line === '') {
+            html += '<br>';
+            continue;
         }
-    });
-    
+        // Более гибкая проверка: ищем ключевые слова в строке
+        if (line.toLowerCase().includes('верхние ноты') || 
+            line.toLowerCase().includes('ноты сердца') || 
+            line.toLowerCase().includes('средние ноты') ||  // <-- ДОБАВЛЕНО
+            line.toLowerCase().includes('базовые ноты') ||
+            line.toLowerCase().includes('нота')) {
+            html += `<div class="note-category">${line}</div>`;
+        } else {
+            html += `<div class="note-item">${line}</div>`;
+        }
+    }
     return html;
 }
 

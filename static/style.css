@@ -1163,3 +1163,80 @@ body {
 .volume-option.active .volume-price {
     color: #00bfff;
 }
+
+
+
+
+
+/* Блок с предложением поиска */
+.search-request {
+    background: linear-gradient(45deg, rgba(0, 191, 255, 0.1), rgba(255, 0, 128, 0.1));
+    border: 1px solid #00bfff;
+    border-radius: 12px;
+    padding: 12px 15px;
+    margin: 0 auto 15px auto;
+    max-width: 800px;
+    text-align: center;
+    backdrop-filter: blur(5px);
+}
+
+.search-request p {
+    color: #ffffff;
+    font-size: 0.95em;
+    margin-bottom: 8px;
+}
+
+.manager-link {
+    display: inline-block;
+    background: linear-gradient(45deg, #00bfff, #ff0080);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9em;
+    transition: transform 0.2s;
+}
+
+.manager-link:hover {
+    transform: scale(1.05);
+}
+
+/* Для варианта внутри шапки */
+.search-note {
+    color: #ff0080;
+    font-size: 0.85em;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed #00bfff30;
+}
+
+/* Для ссылки в компактном варианте */
+.telegram-link {
+    color: #00bfff;
+    text-decoration: none;
+    font-weight: bold;
+    border-bottom: 1px dashed #00bfff;
+}
+
+.telegram-link:hover {
+    color: #ff0080;
+    border-bottom-color: #ff0080;
+}
+
+/* Для кнопки менеджера */
+.manager-link {
+    display: inline-block;
+    background: linear-gradient(45deg, #00bfff, #ff0080);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9em;
+    transition: transform 0.2s;
+}
+
+.manager-link:hover {
+    transform: scale(1.05);
+}
