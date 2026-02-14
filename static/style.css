@@ -1240,3 +1240,47 @@ body {
 .manager-link:hover {
     transform: scale(1.05);
 }
+
+/* Предупреждение о цене - золотой вариант */
+.price-warning-note {
+    color: #ffd700;  /* Золотой текст */
+    font-size: 0.9em;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    padding: 8px 0 8px 15px;
+    line-height: 1.5;
+    position: relative;
+    border-left: 4px solid #ffd700;  /* Золотая вертикальная линия */
+    background: rgba(255, 215, 0, 0.05); /* Легкий золотой фон */
+    border-radius: 0 8px 8px 0;
+}
+
+.price-warning-note::before {
+    position: absolute;
+    left: -5px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2em;
+    filter: drop-shadow(0 0 3px rgba(255, 215, 0, 0.3));
+}
+
+/* Альтернативный вариант с золотой линией */
+.price-warning-note-gold {
+    color: #ffd700;  /* Золотой текст */
+    font-size: 0.85em;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    padding-left: 15px;
+    line-height: 1.4;
+    position: relative;
+    border-left: 3px solid #ffd700;  /* Золотая вертикальная линия */
+}
+
+.price-warning-note-gold::before {
+    content: "⚠️";
+    color: #ffd700;
+    position: absolute;
+    left: -5px;
+    top: 0;
+    font-size: 1.1em;
+}

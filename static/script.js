@@ -9,7 +9,7 @@ const products = {
     1: {
         brand: "Cerruti", // НЕВИДИМОЕ ПОЛЕ ДЛЯ ПОИСКА
         name: "Cerruti 1881 Pour Femme, 50ml",
-        description: "Верхние ноты\nМимоза, фиалка, бергамот, ирис, фрезия, ромашка, роза\n\nНоты сердца\nЖасмин, флердоранж, кориандр, герань, гвоздика, жасминовая эссенция\n\nБазовые ноты\nДревесные аккорды, мускус, сандал, амбра, ваниль, кедр",
+        description: "Верхние ноты\nМимоза, фиалка, бергамот, ирис, фрезия, ромашка, роза\n\nНоты сердца\nЖасмин, флердоранж, кориандр, герань, гвоздика, жасминовая эссенция\n\nБазовые ноты\nДревесные аккорды, мускус, сандал, амбра, ваниль, кедр\n\nЦена ориентировочная. Точную стоимость сообщим после оформления заказа.",
         volumes: [
             { size: "50ml", price: 2850, oldPrice: 3350 }
         ],
@@ -25,7 +25,7 @@ const products = {
     2: {
         brand: "Cacharel",
         name: "Cacharel Noa, 50ml",
-        description: "Верхние ноты\nБелый мускус, Пион, Фрезия, Зеленые ноты, Персик, Слива\n\nНоты сердца\nЛилия, Ландыш, Зеленая трава, Жасмин, Иланг-иланг, Роза\n\nБазовые ноты\nКофе, Ваниль, Сандал, Кориандр, Ладан, Бобы тонка, Кедр",
+        description: "Верхние ноты\nБелый мускус, Пион, Фрезия, Зеленые ноты, Персик, Слива\n\nНоты сердца\nЛилия, Ландыш, Зеленая трава, Жасмин, Иланг-иланг, Роза\n\nБазовые ноты\nКофе, Ваниль, Сандал, Кориандр, Ладан, Бобы тонка, Кедр\n\nЦена ориентировочная. Точную стоимость сообщим после оформления заказа.",
         volumes: [
             { size: "50ml", price: 3500, oldPrice: 4700 }
         ],
@@ -40,7 +40,7 @@ const products = {
     3: {
         brand: "Calvin Klein",
         name: "Calvin Klein Truth, 100ml",
-        description: "Верхние ноты\nБамбук, Клевер, Бергамот, Ветивер, Лимон и Пачули\n\nНоты сердца\nЛилия, Пион, Сандал, Мимоза, Цветок шелкового дерева и Ежевика",
+        description: "Верхние ноты\nБамбук, Клевер, Бергамот, Ветивер, Лимон и Пачули\n\nНоты сердца\nЛилия, Пион, Сандал, Мимоза, Цветок шелкового дерева и Ежевика\n\nЦена ориентировочная. Точную стоимость сообщим после оформления заказа.",
         volumes: [
             { size: "100ml", price: 3800, oldPrice: 5000 }
         ],
@@ -56,12 +56,12 @@ const products = {
     4: {
         brand: "Calvin Klein",
         name: "Calvin Klein Eternity Air For Women, 100ml",
-        description: "Верхняя нота\nНебесный Аккорд, Грейпфрут\n\nНота сердца\nГруша, Пион, Ландыш\n\nБазовая нота\nКедр, Мускус, Серая амбра",
+        description: "Верхняя нота\nНебесный Аккорд, Грейпфрут\n\nНота сердца\nГруша, Пион, Ландыш\n\nБазовая нота\nКедр, Мускус, Серая амбра\n\nЦена ориентировочная. Точную стоимость сообщим после оформления заказа.",
         volumes: [
             { size: "100ml", price: 6450, oldPrice: 8700 }
         ],
-        catalogImage: "/static/images/41.WEBP",
-        productImage: "/static/images/41.WEBP",
+        catalogImage: "/static/images/41.jpg",
+        productImage: "/static/images/41.jpg",
         additionalImages: [
             "/static/images/42.WEBP",
             "/static/images/43.WEBP",
@@ -73,7 +73,7 @@ const products = {
     5: {
         brand: "LANVIN",
         name: "Lanvin Eclat D'Arpege, 100ml",
-        description: "Верхние ноты\nЗеленая сирень, листья сицилийского лимона, чай\n\nНоты сердца\nПион, китайский османтус, глициния (вистерия), цветок персика, зеленый чай\n\nБазовые ноты\nБелый мускус, амбра, ливанский кедр",
+        description: "Верхние ноты\nЗеленая сирень, листья сицилийского лимона, чай\n\nНоты сердца\nПион, китайский османтус, глициния (вистерия), цветок персика, зеленый чай\n\nБазовые ноты\nБелый мускус, амбра, ливанский кедр\n\nЦена ориентировочная. Точную стоимость сообщим после оформления заказа.",
         volumes: [
             { size: "100ml", price: 6960, oldPrice: 9930 }
         ],
@@ -90,7 +90,7 @@ const products = {
     6: {
         brand: "Guerlain",
         name: "Guerlain LUI, 50ml",
-        description: "Верхние ноты\nГруша (свежесть, сочность) и Бергамот\n\nСредние ноты (сердце)\nБензоин, Гвоздика\n\nБазовые ноты\nКожа, Дым, Ваниль, Древесные ноты, Мускус",
+        description: "Верхние ноты\nГруша (свежесть, сочность) и Бергамот\n\nСредние ноты (сердце)\nБензоин, Гвоздика\n\nБазовые ноты\nКожа, Дым, Ваниль, Древесные ноты, Мускус\n\nЦена ориентировочная. Точную стоимость сообщим после оформления заказа.",
         volumes: [
             { size: "50ml", price: 18900, oldPrice: 27000 }
         ],
@@ -106,7 +106,7 @@ const products = {
     7: {
         brand: "LALIQUE",
         name: "LALIQUE L'Amour, 30ml",
-        description: "Верхние ноты\nШафран, ягоды можжевельника, китайский грейпфрут (или помело)\n\nНоты сердца (средние)\nЧерная фиалка, кожа, иногда отмечается роза\n\nБазовые ноты\nМалина, ветивер, кашмеран",
+        description: "Верхние ноты\nШафран, ягоды можжевельника, китайский грейпфрут (или помело)\n\nНоты сердца (средние)\nЧерная фиалка, кожа, иногда отмечается роза\n\nБазовые ноты\nМалина, ветивер, кашмеран\n\nЦена ориентировочная. Точную стоимость сообщим после оформления заказа.",
         volumes: [
             { size: "30ml", price: 5520, oldPrice: 7900 }
         ],
@@ -124,7 +124,7 @@ const products = {
     8: {
         brand: "BYREDO",
         name: "BYREDO black saffron, 50ml",
-        description: "Верхние ноты\nКожи, Шафран\n\nНоты сердца\nГелиотроп, Фиалка\n\nБазовые ноты\nДревесные ноты, Малина, Кедр",
+        description: "Верхние ноты\nКожи, Шафран\n\nНоты сердца\nГелиотроп, Фиалка\n\nБазовые ноты\nДревесные ноты, Малина, Кедр\n\nЦена ориентировочная. Точную стоимость сообщим после оформления заказа.",
         volumes: [
             { size: "50ml", price: 13640, oldPrice: 19483 }
         ],
@@ -140,7 +140,7 @@ const products = {
     9: {
         brand: "KILIAN",
         name: "KILIAN PARIS Born To Be Unforgettable, 50ml",
-        description: "Верхние ноты\nБергамот, Грейпфрут, Мандарин\n\nНоты сердца\nГерань, Лаванда, Шалфей мускатный\n\nБазовые ноты\nПачули, Ветивер, Дубовый мох",
+        description: "Верхние ноты\nБергамот, Грейпфрут, Мандарин\n\nНоты сердца\nГерань, Лаванда, Шалфей мускатный\n\nБазовые ноты\nПачули, Ветивер, Дубовый мох\n\nЦена ориентировочная. Точную стоимость сообщим после оформления заказа.",
         volumes: [
             { size: "50ml", price: 9650, oldPrice: 13770 }
         ],
@@ -156,7 +156,7 @@ const products = {
     10: {
         brand: "JIMMY CHOO",
         name: "JIMMY CHOO Floral, 90ml",
-        description: "Верхние ноты\nМандарин, Бергамот\n\nНоты сердца\nФрезия, Жасмин, Нектарин\n\nБазовые ноты\nКедр, Корица, Мускус",
+        description: "Верхние ноты\nМандарин, Бергамот\n\nНоты сердца\nФрезия, Жасмин, Нектарин\n\nБазовые ноты\nКедр, Корица, Мускус\n\nЦена ориентировочная. Точную стоимость сообщим после оформления заказа.",
         volumes: [
             { size: "90ml", price: 7800, oldPrice: 11150 }
         ],
@@ -172,7 +172,7 @@ const products = {
     11: {
         brand: "BANDERAS",
         name: "BANDERAS Blue Seduction, 100ml",
-        description: "Верхние ноты\nАрбуз, Огурец, Бергамот, Мандарин\n\nНоты сердца\nАнанас, Дыня, Водные ноты, Базилик\n\nБазовые ноты\nМускус, Древесные ноты, Амбра",
+        description: "Верхние ноты\nАрбуз, Огурец, Бергамот, Мандарин\n\nНоты сердца\nАнанас, Дыня, Водные ноты, Базилик\n\nБазовые ноты\nМускус, Древесные ноты, Амбра\n\nЦена ориентировочная. Точную стоимость сообщим после оформления заказа.",
         volumes: [
             { size: "100ml", price: 2800, oldPrice: 3550 }
         ],
@@ -229,11 +229,16 @@ function formatNotes(description) {
         // Более гибкая проверка: ищем ключевые слова в строке
         if (line.toLowerCase().includes('верхние ноты') || 
             line.toLowerCase().includes('ноты сердца') || 
-            line.toLowerCase().includes('средние ноты') ||  // <-- ДОБАВЛЕНО
+            line.toLowerCase().includes('средние ноты') || 
             line.toLowerCase().includes('базовые ноты') ||
             line.toLowerCase().includes('нота')) {
             html += `<div class="note-category">${line}</div>`;
-        } else {
+        } 
+        // Проверяем, содержит ли строка "цена ориентировочная"
+        else if (line.toLowerCase().includes('цена ориентировочная')) {
+            html += `<div class="price-warning-note">${line}</div>`;
+        }
+        else {
             html += `<div class="note-item">${line}</div>`;
         }
     }
@@ -505,6 +510,8 @@ function changeAdditionalImage(imageIndex) {
 // Страница товара
 // Страница товара
 function showProductPage(productId) {
+    // Сохраняем текущую позицию скролла
+    localStorage.setItem('catalogScrollPosition', window.scrollY);
     console.log('Показываем страницу товара ID:', productId);
     
     currentProduct = productId;
@@ -654,6 +661,21 @@ function showProductPage(productId) {
     // Показываем страницу товара и скрываем главную
     productPage.style.display = 'block';
     document.querySelector('.container').style.display = 'none';
+}
+
+// Восстанавливаем позицию скролла при возврате
+function hideProductPage() {
+    productPage.style.display = 'none';
+    document.querySelector('.container').style.display = 'block';
+    
+    // Восстанавливаем позицию скролла
+    const savedPosition = localStorage.getItem('catalogScrollPosition');
+    if (savedPosition) {
+        setTimeout(() => {
+            window.scrollTo(0, parseInt(savedPosition));
+            localStorage.removeItem('catalogScrollPosition'); // Очищаем после восстановления
+        }, 50); // Небольшая задержка для гарантии
+    }
 }
 
 // Слайдер фотографий
@@ -899,11 +921,6 @@ function changeAdditionalImage(imageIndex) {
             dot.style.background = index === imageIndex ? '#00bfff' : '#333';
         });
     }
-}
-
-function hideProductPage() {
-    productPage.style.display = 'none';
-    document.querySelector('.container').style.display = 'block';
 }
 
 function selectVolume(index) {
