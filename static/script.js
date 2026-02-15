@@ -186,6 +186,24 @@ const products = {
         badge: "🔥",
         retailerLink: "https://www.letu.ru/product/antonio-banderas-blue-seduction-for-men/11288/sku/43583"
     },
+
+    12: {
+        brand: "Sergio Tacchini",
+        name: "Sergio Tacchini Donna, 75ml",
+        description: "Верхние ноты\nПрохладная свежесть, Озон, Арбуз, Дыня\n\nНоты сердца\nЦикламен, Пион, Ландыш, Магнолия, Гардения\n\nБазовые ноты\nСандаловое дерево, Мускус, Водяные фрукты\n\n⚠️ Цена ориентировочная. Точную стоимость сообщим после оформления заказа.",
+        volumes: [
+            { size: "75ml", price: 2400, oldPrice: 3300 },
+            { size: "75ml tester", price: 2100, oldPrice: 2900 },
+            { size: "50ml", price: 2100, oldPrice: 2590 }
+        ],
+        catalogImage: "/static/images/121.webp",
+        productImage: "/static/images/121.webp",
+        additionalImages: [
+            
+        ],
+        badge: "🔥",
+        retailerLink: "https://randewoo.ru/product/sergio-tacchini-donna"
+    },
 };
 
 // Функция для создания описания товара
