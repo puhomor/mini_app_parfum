@@ -204,6 +204,40 @@ const products = {
         badge: "🔥",
         retailerLink: "https://randewoo.ru/product/sergio-tacchini-donna"
     },
+
+    13: {
+        brand: "Baldessarini",
+        name: "Baldessarini Ambre, 90ml",
+        description: "Верхние ноты\nМандарин, Красное яблоко\n\nНоты сердца\nКожа, Фиалка, Лабданум\n\nБазовые ноты\nАмбра, Ваниль, Дуб\n\n⚠️ Цена ориентировочная. Точную стоимость сообщим после оформления заказа.",
+        volumes: [
+            { size: "90ml", price: 4200, oldPrice: 5850 }
+        ],
+        catalogImage: "/static/images/131.jpg",
+        productImage: "/static/images/131.jpg",
+        additionalImages: [
+            "/static/images/132.jpg",
+            "/static/images/133.jpg",
+            "/static/images/134.jpg"
+        ],
+        badge: "🔥",
+        retailerLink: "https://goldapple.ru/7032100002-ambre?srsltid=AfmBOoo57oVRdnb2bCr3MsZc7Ykl8tydXSHljU-Bj54ngZOfj4H9wfu1"
+    },
+
+    14: {
+        brand: "Trussardi",
+        name: "Trussardi My Land, 100ml",
+        description: "Верхние ноты\nБергамот, Зеленый мандарин\n\nНоты сердца\nЛаванда, Фиалка, Калон\n\nБазовые ноты\nКожа, Ветивер, Бобы тонка, Кашмирское дерево\n\n⚠️ Цена ориентировочная. Точную стоимость сообщим после оформления заказа.",
+        volumes: [
+            { size: "100ml", price: 3970, oldPrice: 5200 }
+        ],
+        catalogImage: "/static/images/142.jpg",
+        productImage: "/static/images/142.jpg",
+        additionalImages: [
+            "/static/images/141.jpg"
+        ],
+        badge: "🔥",
+        retailerLink: "https://www.letu.ru/product/trussardi-my-land/2600010/sku/2700001"
+    },
 };
 
 // Функция для создания описания товара
